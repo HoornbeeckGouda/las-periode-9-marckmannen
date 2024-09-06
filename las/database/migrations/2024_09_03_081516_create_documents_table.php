@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->string('type')->max(45);
+            $table->string('description')->max(45);
+            $table->string('file')->max(45);
+            $table->foreignId('student_id')->constrained()->on('students')->onDelete('cascade');
             $table->timestamps();
         });
     }

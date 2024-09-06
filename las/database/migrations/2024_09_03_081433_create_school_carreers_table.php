@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('school_carreers', function (Blueprint $table) {
             $table->id();
+            // $table->unsignedBigInteger('course_year_id')->foreign('course_year_id')->references('id')->on('course_years')->onDelete('cascade');
+            // $table->unsignedBigInteger('course_id')->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            // $table->unsignedBigInteger('group_id')->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            // $table->unsignedBigInteger('student_id')->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->foreignId('course_year_id')->constrained()->on('course_years')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained()->on('courses')->onDelete('cascade');
+            $table->foreignId('group_id')->constrained()->on('groups')->onDelete('cascade');
+            $table->foreignId('student_id')->constrained()->on('students')->onDelete('cascade');
+
+        
+
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name')->max(45);
+            $table->string('middle_name')->max(45);
+            $table->string('last_name')->max(45);
+            $table->string('initials')->max(45);
+            $table->string('full_name')->max(45);
+            $table->string('zipcode')->max(45);
+            $table->string('street')->max(45);
+            $table->integer('house_number');
+            $table->string('addition')->max(45);
+            $table->string('city')->max(45);
             $table->timestamps();
         });
     }
