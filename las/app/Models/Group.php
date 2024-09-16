@@ -11,6 +11,6 @@ class Group extends Model
 
     public function schoolCarreer()
     {
-        return $this->belongsTo(SchoolCarreer::class);
+        return $this->hasMany(SchoolCarreer::class);
     }
 }

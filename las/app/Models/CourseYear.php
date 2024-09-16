@@ -11,6 +11,6 @@ class CourseYear extends Model
 
     public function schoolCarreer()
     {
-        return $this->belongsTo(schoolCarreer::class);
+        return $this->hasMany(schoolCarreer::class);
     }
 }

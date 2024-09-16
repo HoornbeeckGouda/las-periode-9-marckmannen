@@ -11,12 +11,12 @@ class SchoolCarreer extends Model
 
     public function courseYears()
     {
-        return $this->hasMany(CourseYear::class);
+        return $this->belongsTo(CourseYear::class);
     }
 
     public function groups()
     {
-        return $this->hasMany(Group::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function subjectResults()
