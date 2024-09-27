@@ -17,7 +17,7 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'group' => $this->faker->regexify('[A-Z]{1}[0-4]{1}[A-Z]{1}[0-4]{1}[A-Z]{2}'),
         ];
     }
 }

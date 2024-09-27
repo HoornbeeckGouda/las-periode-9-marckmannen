@@ -17,6 +17,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('school_carreer_id')->foreign('school_carreer_id')->references('id')->on('school_carreers')->onDelete('cascade');
             $table->foreignId('school_carreer_id')->constrained()->on('school_carreers')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained()->on('subjects')->onDelete('cascade');
+            $table->integer('result');
 
 
             $table->timestamps();

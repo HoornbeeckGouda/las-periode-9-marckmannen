@@ -17,7 +17,10 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'student_id' => $this->faker->numberBetween(1, 30),
+            'type' => $this->faker->fileExtension(),
+            'file' => $this->faker->word,
+            'description' => $this->faker->sentence,
         ];
     }
 }

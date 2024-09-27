@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SubjectResult;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class SubjectResultsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        SubjectResult::factory()->count(10)->create();
     }
 }

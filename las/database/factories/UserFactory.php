@@ -14,13 +14,15 @@ class UserFactory extends Factory
     /**
      * The current password being used by the factory.
      */
-    protected static ?string $password;
+    protected static ?string $password = 'student123';
 
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
+    private static $usedNumbers = [];
+
     public function definition(): array
     {
         return [
@@ -28,6 +30,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'student_id' => $this->getUniqueNumber(1, 30),
             'remember_token' => Str::random(10),
         ];
     }
@@ -40,5 +43,16 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    private function getUniqueNumber($min, $max)
+    {
+        do {
+            $number = $this->faker->numberBetween($min, $max);
+        } while (in_array($number, self::$usedNumbers));
+
+        self::$usedNumbers[] = $number;
+
+        return $number;
     }
 }

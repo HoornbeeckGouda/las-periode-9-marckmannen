@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SchoolCarreer>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SubjectResults>
  */
-class SchoolCarreerFactory extends Factory
+class SubjectResultFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,17 +18,17 @@ class SchoolCarreerFactory extends Factory
 
     private static $usedNumbers = [];
     
+    
     public function definition(): array
     {
+        $subjectIds = Subject::pluck('id')->toArray();
         return [
-            'course_year_id' => $this->faker->numberBetween(1, 10),
-            'course_id' => $this->faker->numberBetween(1, 10),
-            'group_id' => $this->faker->numberBetween(1, 10),
-            'student_id' => $this->getUniqueNumber(1, 30),
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->date(),
+            'school_carreer_id' => $this->getUniqueNumber(1, 10),
+            'subject_id' => $this->faker->randomElement($subjectIds),
+            'result' => $this->faker->numberBetween(1, 10),
         ];
     }
+
     private function getUniqueNumber($min, $max)
     {
         do {

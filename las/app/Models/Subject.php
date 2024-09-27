@@ -11,6 +11,6 @@ class Subject extends Model
 
     public function subjectResults()
     {
-        return $this->hasMany(SubjectResults::class);
+        return $this->hasMany(SubjectResult::class);
     }
 }

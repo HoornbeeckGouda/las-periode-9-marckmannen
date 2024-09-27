@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Student;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -19,6 +20,7 @@ class ProfileController extends Controller
     {
         $user = $request->user();
         $student = Student::find($user->student_id);
+        $user = User::with('role')->find($user->role_id);
 
         return view('profile.edit', [
             'user' => $user,

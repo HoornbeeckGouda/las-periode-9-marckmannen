@@ -17,7 +17,9 @@ class CourseYearFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'course_year' => $this->faker->numberBetween(1, 6),
+            'start_date' => $this->faker->date(),
+            'end_date' => $this->faker->date(),
         ];
     }
 }

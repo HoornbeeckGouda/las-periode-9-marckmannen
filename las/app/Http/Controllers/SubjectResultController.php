@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubjectResults;
+use App\Models\SubjectResult;
 use App\Http\Requests\StoreSubjectResultsRequest;
 use App\Http\Requests\UpdateSubjectResultsRequest;
 
@@ -13,7 +13,7 @@ class SubjectResultsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -35,7 +35,7 @@ class SubjectResultsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubjectResults $subjectResults)
+    public function show(SubjectResult $subjectResults)
     {
         //
     }
@@ -43,7 +43,7 @@ class SubjectResultsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubjectResults $subjectResults)
+    public function edit(SubjectResult $subjectResults)
     {
         //
     }
@@ -51,7 +51,7 @@ class SubjectResultsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubjectResultsRequest $request, SubjectResults $subjectResults)
+    public function update(UpdateSubjectResultsRequest $request, SubjectResult $subjectResults)
     {
         //
     }
@@ -59,7 +59,7 @@ class SubjectResultsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubjectResults $subjectResults)
+    public function destroy(SubjectResult $subjectResults)
     {
         //
     }
