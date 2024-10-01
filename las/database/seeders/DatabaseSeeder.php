@@ -6,7 +6,7 @@ use App\Models\CourseSubject;
 use App\Models\CourseYear;
 use App\Models\Document;
 use App\Models\Group;
-use App\Models\SchoolCarreer;
+use App\Models\schoolCareer;
 use App\Models\Subject;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             StudentSeeder::class,
             CourseYearSeeder::class,
             UserSeeder::class,
-            SchoolCarreerSeeder::class,
+            schoolCareerSeeder::class,
             SubjectResultsSeeder::class,
             DocumentSeeder::class,
             CourseSubjectSeeder::class,

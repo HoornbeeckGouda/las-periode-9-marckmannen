@@ -9,8 +9,8 @@ class CourseYear extends Model
 {
     use HasFactory;
 
-    public function schoolCarreer()
+    public function schoolCareer()
     {
-        return $this->hasMany(schoolCarreer::class);
+        return $this->hasMany(schoolCareer::class);
     }
 }

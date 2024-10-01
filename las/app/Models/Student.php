@@ -14,9 +14,9 @@ class Student extends Model
         return $this->hasMany(Document::class);
     }
 
-    public function schoolCarreers()
+    public function schoolCareers()
     {
-        return $this->hasMany(SchoolCarreer::class);
+        return $this->hasMany(schoolCareer::class);
     }
 
     public function user()

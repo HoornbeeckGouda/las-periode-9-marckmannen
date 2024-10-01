@@ -9,8 +9,8 @@ class Group extends Model
 {
     use HasFactory;
 
-    public function schoolCarreer()
+    public function schoolCareer()
     {
-        return $this->hasMany(SchoolCarreer::class);
+        return $this->hasMany(schoolCareer::class);
     }
 }

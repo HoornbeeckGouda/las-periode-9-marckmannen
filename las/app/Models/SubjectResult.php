@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Subject;
-use App\Models\SchoolCarreer;
+use App\Models\schoolCareer;
 
 class SubjectResult extends Model
 {
@@ -15,8 +15,8 @@ class SubjectResult extends Model
     {
         return $this->belongsTo(Subject::class);
     }
-    public function schoolCarreer()
+    public function schoolCareer()
     {
-        return $this->belongsTo(SchoolCarreer::class);
+        return $this->belongsTo(schoolCareer::class);
     }
 }

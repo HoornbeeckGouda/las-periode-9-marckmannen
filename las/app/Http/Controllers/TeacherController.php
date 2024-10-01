@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\schoolCareer;
-use App\Http\Requests\StoreschoolCareerRequest;
-use App\Http\Requests\UpdateschoolCareerRequest;
+use App\Models\Teacher;
+use Illuminate\Http\Request;
 
-class schoolCareerController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class schoolCareerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreschoolCareerRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class schoolCareerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(schoolCareer $schoolCareer)
+    public function show(Teacher $teacher)
     {
         //
     }
@@ -43,7 +42,7 @@ class schoolCareerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(schoolCareer $schoolCareer)
+    public function edit(Teacher $teacher)
     {
         //
     }
@@ -51,7 +50,7 @@ class schoolCareerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateschoolCareerRequest $request, schoolCareer $schoolCareer)
+    public function update(Request $request, Teacher $teacher)
     {
         //
     }
@@ -59,7 +58,7 @@ class schoolCareerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(schoolCareer $schoolCareer)
+    public function destroy(Teacher $teacher)
     {
         //
     }
