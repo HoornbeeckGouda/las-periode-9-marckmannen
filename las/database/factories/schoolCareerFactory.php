@@ -20,7 +20,7 @@ class schoolCareerFactory extends Factory
     public function definition(): array
     {
         return [
-            'course_year_id' => $this->faker->numberBetween(1, 10),
+            'course_year_id' => $this->faker->numberBetween(1, 5),
             'course_id' => $this->faker->numberBetween(1, 10),
             'group_id' => $this->faker->numberBetween(1, 10),
             'student_id' => $this->getUniqueNumber(1, 30),

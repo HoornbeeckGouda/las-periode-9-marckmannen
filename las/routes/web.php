@@ -3,12 +3,19 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\SubjectResultsController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [SubjectResultsController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/grading', [SubjectResultsController::class, 'index'])->middleware(['auth'])->name('grading');
+Route::get('/users', [UserController::class, 'index'])->middleware(['auth'])->name('users');
+Route::get('/students', [StudentController::class, 'index'])->middleware(['auth'])->name('students');
 
 
 Route::middleware(['auth'])->group(function () {

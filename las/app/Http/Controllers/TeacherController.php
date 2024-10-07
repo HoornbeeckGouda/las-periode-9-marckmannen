@@ -12,7 +12,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
