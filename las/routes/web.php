@@ -12,10 +12,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', [SubjectResultsController::class, 'index'])->middleware(['auth'])->name('dashboard');
-Route::get('/grading', [SubjectResultsController::class, 'index'])->middleware(['auth'])->name('grading');
-Route::get('/users', [UserController::class, 'index'])->middleware(['auth'])->name('users');
-Route::get('/students', [StudentController::class, 'index'])->middleware(['auth'])->name('students');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/grading', [SubjectResultsController::class, 'index'])->middleware(['auth', 'notRole:1'])->name('grading');
+Route::get('/users', [UserController::class, 'index'])->middleware(['auth', 'notRole:1'])->name('users');
+Route::get('/students', [SubjectResultsController::class, 'index'])->middleware(['auth', 'notRole:1'])->name('students');
+
+Route::get('/students/{student}/grade', [SubjectResultsController::class, 'grade'])->name('students.grade');
+Route::POST('/students/{student}/grade', [SubjectResultsController::class, 'create'])->name('students.grade.create');
 
 
 Route::middleware(['auth'])->group(function () {

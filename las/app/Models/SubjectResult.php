@@ -10,6 +10,11 @@ use App\Models\schoolCareer;
 class SubjectResult extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'subject_id',
+        'school_career_id',
+        'result',
+    ];
 
     public function subject()
     {

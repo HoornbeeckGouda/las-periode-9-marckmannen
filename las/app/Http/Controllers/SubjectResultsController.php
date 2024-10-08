@@ -7,8 +7,9 @@ use App\Http\Requests\StoreSubjectResultsRequest;
 use App\Http\Requests\UpdateSubjectResultsRequest;
 use App\Models\Group;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
-use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectResultsController extends Controller
 {
@@ -19,15 +20,21 @@ class SubjectResultsController extends Controller
     {
         $query = Student::with(['schoolCareers.course', 'schoolCareers.courseYear', 'schoolCareers.group']);
     
-        $students = $query->paginate(30);
-
-        if ($request->has('groups') && !empty($request->groups)) {
+        if ($request->has('groups') && !empty(array_filter($request->groups))) {
             $query->whereHas('schoolCareers.group', function ($q) use ($request) {
                 $q->whereIn('group', $request->groups);
             });
         }
+
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where(function ($q) use ($request) {
+                $q->where('first_name', 'like', '%' . $request->search . '%')
+                  ->orWhere('middle_name', 'like', '%' . $request->search . '%')
+                  ->orWhere('last_name', 'like', '%' . $request->search . '%');
+            });
+        }
     
-        
+        $students = $query->paginate(30);
     
         // Filter to get the latest school career for each student
         $students->each(function ($student) {
@@ -42,9 +49,13 @@ class SubjectResultsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // $query = SubjectResult::create ([
+        //     'subject_id' => $request->subject_id,
+        //     'result' => $request->grade,
+        //     'school_career_id' => $request->school_career_id,
+        // ]);
     }
 
     /**
@@ -85,5 +96,21 @@ class SubjectResultsController extends Controller
     public function destroy(SubjectResult $subjectResults)
     {
         //
+    }
+
+    public function getTeacherSubject()
+    {
+        $user = Auth::user();
+        $teacher = Teacher::where('user_id', $user->id)->firstOrFail();
+        $subject = $teacher->subject;
+        return $subject;
+    }
+
+    public function grade(Student $student)
+    {
+        $user = Auth::user();
+        $subject = $this->getTeacherSubject()->id;
+        $role = $user->role->name;
+        return view('students.grade', compact('student', 'role', 'subject'));
     }
 }
