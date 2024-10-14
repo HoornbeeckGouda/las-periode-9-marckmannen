@@ -6,7 +6,9 @@ use App\Models\SubjectResult;
 use App\Http\Requests\StoreSubjectResultsRequest;
 use App\Http\Requests\UpdateSubjectResultsRequest;
 use App\Models\Group;
+use App\Models\schoolCareer;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,11 +53,19 @@ class SubjectResultsController extends Controller
      */
     public function create(Request $request)
     {
-        // $query = SubjectResult::create ([
-        //     'subject_id' => $request->subject_id,
-        //     'result' => $request->grade,
-        //     'school_career_id' => $request->school_career_id,
-        // ]);
+
+        $subjectResult = SubjectResult::updateOrCreate(
+            [
+                'subject_id' => $request->subject_id,
+                'school_career_id' => $request->school_career_id,
+            ],
+            [
+                'result' => $request->grade,
+            ]
+        );
+        $subjectResult->save();
+
+            return redirect()->route('grading');
     }
 
     /**
@@ -69,9 +79,23 @@ class SubjectResultsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubjectResult $subjectResults)
+    public function show(string $student_id)
     {
-        //
+        $student = Student::findOrFail($student_id);
+        $user = Auth::user();
+        $subjects = Subject::all();
+
+        $teacher = Teacher::where('user_id', $user->id)->get();
+        if (in_array($user->role_id, [2, 5])) {
+            $subject = ['anything'];
+        } else {
+            $subject = $teacher->subject;
+        }
+
+        // $subject = $this->getTeacherSubject($user);
+        $schoolCareer = $student->schoolCareers->sortByDesc('courseYear.start_date')->first();
+        return view('students.grade', compact('student', 'user', 'subject', 'subjects', 'schoolCareer'));
+
     }
 
     /**
@@ -98,19 +122,10 @@ class SubjectResultsController extends Controller
         //
     }
 
-    public function getTeacherSubject()
-    {
-        $user = Auth::user();
-        $teacher = Teacher::where('user_id', $user->id)->firstOrFail();
-        $subject = $teacher->subject;
-        return $subject;
-    }
+    // public function getTeacherSubject($user)
+    // {
 
-    public function grade(Student $student)
-    {
-        $user = Auth::user();
-        $subject = $this->getTeacherSubject()->id;
-        $role = $user->role->name;
-        return view('students.grade', compact('student', 'role', 'subject'));
-    }
+    // }
+
+
 }

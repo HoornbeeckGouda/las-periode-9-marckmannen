@@ -34,7 +34,7 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($students as $student)
-                            <a href="{{ route('students.grade', $student) }}" class="bg-white dark:bg-gray-700 shadow-md rounded-lg overflow-hidden block">
+                            <a href="{{ route('grading.show', $student) }}" class="bg-white dark:bg-gray-700 shadow-md rounded-lg overflow-hidden block">
                                 <div class="flex items-center p-4">
                                     @if ($student->photo)
                                         <img class="w-16 h-16 rounded-full object-cover mr-4" src="data:image/jpeg;base64,{{ base64_encode($student->photo) }}" alt="{{ $student->first_name }}">

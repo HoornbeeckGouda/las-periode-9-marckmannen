@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GradingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SubjectResultsController;
@@ -17,8 +18,8 @@ Route::get('/grading', [SubjectResultsController::class, 'index'])->middleware([
 Route::get('/users', [UserController::class, 'index'])->middleware(['auth', 'notRole:1'])->name('users');
 Route::get('/students', [SubjectResultsController::class, 'index'])->middleware(['auth', 'notRole:1'])->name('students');
 
-Route::get('/students/{student}/grade', [SubjectResultsController::class, 'grade'])->name('students.grade');
-Route::POST('/students/{student}/grade', [SubjectResultsController::class, 'create'])->name('students.grade.create');
+Route::get('/grading/{student}', [SubjectResultsController::class, 'show'])->name('grading.show');
+Route::post('/grading/{student}', [SubjectResultsController::class, 'create'])->name('grading.create');
 
 
 Route::middleware(['auth'])->group(function () {

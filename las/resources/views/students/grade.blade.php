@@ -12,13 +12,25 @@
                     <p>{{ $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name }}</p>
                     
                     <!-- Grading Form -->
-                    <form method="POST" action="{{ route('students.grade.create', $student) }}">
+                    <form method="POST" action="{{ route('grading.create', $student) }}">
                         @csrf
                         <div class="mt-4">
                             <label for="grade" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('Grade') }}</label>
-                            <input type="text" id="grade" name="grade" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <input type="hidden" name="school_career_id" value="{{ $student->school_career_id }}">
-                            <input type="hidden" name="subject_id" value="{{ $subject->id }}">
+                            <input type="number" max="10" min="0" id="grade" name="grade" required class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <input type="hidden" name="school_career_id" value="{{ $schoolCareer->id }}">
+
+                            @if (in_array($user->role->id, [2, 5]))
+                            <label for="subject_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('Subject') }}</label>
+                            <select id="subject_id" name="subject_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                @foreach ($subjects as $subject)
+                                    <option value="{{ $subject->id }}" {{ request('subject_id') == $subject->id ? 'selected' : '' }}>
+                                        {{ 'Subject: ' . $subject->subject }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @else
+                            <input name="subject_id" value="{{ $subject->id }}" readonly>
+                            @endif
                         </div>
                         <div class="mt-4">
                             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">{{ __('Submit') }}</button>

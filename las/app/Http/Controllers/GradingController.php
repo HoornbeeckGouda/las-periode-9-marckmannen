@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Teacher;
 
-class StudentController extends Controller
+class GradingController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Student $student)
     {
-
+        $user = Auth::user();
+        $subject = $this->getTeacherSubject()->id;
+        $role = $user->role->name;
+        return view('students.grade', compact('student', 'role', 'subject'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request, Student $student)
     {
         //
     }
@@ -39,10 +43,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        $user = Auth::user();
-        $subject = $this->getTeacherSubject()->id;
-        $role = $user->role->name;
-        return view('students.grade', compact('student', 'role', 'subject'));
+        //
     }
 
     /**
